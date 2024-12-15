@@ -2,7 +2,7 @@ from database.connection import get_connection
 
 class Magazine:
     def __init__(self, id, name, category):
-        # Validate the name and category
+        
         if isinstance(name, str) and 2 <= len(name) <= 16:
             if isinstance(category, str) and len(category) > 0:
                 self._id = id
@@ -18,7 +18,7 @@ class Magazine:
         connection = get_connection()
         cursor = connection.cursor()
 
-        # Check if the magazine ID already exists
+
         cursor.execute("SELECT * FROM magazines WHERE id = ?", (self._id,))
         existing_entry = cursor.fetchone()
 
@@ -44,7 +44,7 @@ class Magazine:
     def category(self):
         return self._category
 
-    # Object Relationship Methods
+    
     def articles(self):
         connection = get_connection()
         cursor = connection.cursor()
@@ -66,7 +66,7 @@ class Magazine:
         connection.close()
         return contributors
 
-    # Aggregate Methods
+    
     def article_titles(self):
         articles = self.articles()
         return [article[1] for article in articles] if articles else None

@@ -13,12 +13,12 @@ class Author:
         connection = get_connection()
         cursor = connection.cursor()
 
-        # Check if the author already exists
+        
         cursor.execute("SELECT id FROM authors WHERE id = ?", (self._id,))
         existing_author = cursor.fetchone()
 
         if not existing_author:
-            # Author doesn't exist, so insert a new one
+        
             cursor.execute("INSERT INTO authors (id, name) VALUES (?, ?)", (self._id, self._name))
         else:
             print(f"Author with ID {self._id} already exists.")
@@ -34,7 +34,7 @@ class Author:
     def name(self):
         return self._name
 
-    # Object Relationship Methods
+    
     def articles(self):
         connection = get_connection()
         cursor = connection.cursor()
